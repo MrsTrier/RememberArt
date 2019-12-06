@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>280533028211-vj9kl2cjp1c2lfrlg7c6edfg0dinfcp1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.280533028211-vj9kl2cjp1c2lfrlg7c6edfg0dinfcp1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByMK05Oo-JiRTnvYbNQJ4QY6AmezyrdAY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>280533028211</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>d.cheremina.RemembArt</string>
+	<key>PROJECT_ID</key>
+	<string>remember-4d974</string>
+	<key>STORAGE_BUCKET</key>
+	<string>remember-4d974.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:280533028211:ios:b402acce28eb32e96b8906</string>
+	<key>DATABASE_URL</key>
+	<string>https://remember-4d974.firebaseio.com</string>
+</dict>
+</plist>

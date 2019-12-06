@@ -1,0 +1,715 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02597F911A901C62F4914511 /* Pods_RemembArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 709C3F0D43365A2970CBC035 /* Pods_RemembArt.framework */; };
+		1CDC864E4E31A8B7D1497978 /* Pods_RemembArtTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F440E7B76C78B23B5B265144 /* Pods_RemembArtTests.framework */; };
+		A05B7C2D238FB4FF00E69819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B7C2C238FB4FF00E69819 /* AppDelegate.swift */; };
+		A05B7C34238FB50200E69819 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A05B7C33238FB50200E69819 /* Assets.xcassets */; };
+		A05B7C37238FB50200E69819 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05B7C35238FB50200E69819 /* LaunchScreen.storyboard */; };
+		A05B7C42238FB50200E69819 /* RemembArtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B7C41238FB50200E69819 /* RemembArtTests.swift */; };
+		A05B7C4D238FB58D00E69819 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A05B7C4C238FB58D00E69819 /* GoogleService-Info.plist */; };
+		A06E49142390419F00EB570F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49102390419F00EB570F /* StartViewController.swift */; };
+		A06E49152390419F00EB570F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49112390419F00EB570F /* SignUpViewController.swift */; };
+		A06E49162390419F00EB570F /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49122390419F00EB570F /* NewUserViewController.swift */; };
+		A06E491A239042F200EB570F /* GameTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E4919239042F200EB570F /* GameTheme.swift */; };
+		A06E491C2390434900EB570F /* ChooseGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E491B2390434900EB570F /* ChooseGameViewController.swift */; };
+		A06E49202390446900EB570F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E491F2390446900EB570F /* GameViewController.swift */; };
+		A06E49222390450700EB570F /* GameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49212390450700EB570F /* GameFlow.swift */; };
+		A06E49242390452200EB570F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49232390452200EB570F /* Card.swift */; };
+		A06E492A2390462F00EB570F /* PopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = A06E49292390462F00EB570F /* PopUpView.m */; };
+		A06E492D2391002700EB570F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E492C2391002700EB570F /* Utilities.swift */; };
+		A06E493E2394EB9100EB570F /* ArcLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E493D2394EB9100EB570F /* ArcLayer.swift */; };
+		A06E49402394EBC300EB570F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E493F2394EBC300EB570F /* Colors.swift */; };
+		A06E49422394EBE600EB570F /* HolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49412394EBE600EB570F /* HolderView.swift */; };
+		A06E49442394EBFD00EB570F /* OvalLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49432394EBFD00EB570F /* OvalLayer.swift */; };
+		A06E49462394EC2700EB570F /* RectangleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49452394EC2700EB570F /* RectangleLayer.swift */; };
+		A06E49482394EC4300EB570F /* TriangleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49472394EC4300EB570F /* TriangleLayer.swift */; };
+		A06E495223955DB100EB570F /* CoreDataModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E495123955DB100EB570F /* CoreDataModule.swift */; };
+		A06E49862396987800EB570F /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A06E49842396987800EB570F /* GameModel.xcdatamodeld */; };
+		A06E498D2396D2C600EB570F /* AvailableGame+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E498B2396D2C600EB570F /* AvailableGame+CoreDataClass.swift */; };
+		A06E498E2396D2C600EB570F /* AvailableGame+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E498C2396D2C600EB570F /* AvailableGame+CoreDataProperties.swift */; };
+		A06E49912396D2E100EB570F /* AvailableImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E498F2396D2E100EB570F /* AvailableImage+CoreDataClass.swift */; };
+		A06E49922396D2E100EB570F /* AvailableImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49902396D2E100EB570F /* AvailableImage+CoreDataProperties.swift */; };
+		A06E49942399386300EB570F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E49932399386300EB570F /* NetworkService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A05B7C3E238FB50200E69819 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A05B7C21238FB4FF00E69819 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A05B7C28238FB4FF00E69819;
+			remoteInfo = RemembArt;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		709C3F0D43365A2970CBC035 /* Pods_RemembArt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemembArt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88459CA30A268EAED0B62742 /* Pods-RemembArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemembArt.release.xcconfig"; path = "Target Support Files/Pods-RemembArt/Pods-RemembArt.release.xcconfig"; sourceTree = "<group>"; };
+		A05B7C29238FB4FF00E69819 /* RemembArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemembArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A05B7C2C238FB4FF00E69819 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A05B7C33238FB50200E69819 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A05B7C36238FB50200E69819 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A05B7C38238FB50200E69819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A05B7C3D238FB50200E69819 /* RemembArtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemembArtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A05B7C41238FB50200E69819 /* RemembArtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemembArtTests.swift; sourceTree = "<group>"; };
+		A05B7C43238FB50200E69819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A05B7C4C238FB58D00E69819 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A06E49102390419F00EB570F /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		A06E49112390419F00EB570F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A06E49122390419F00EB570F /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
+		A06E4919239042F200EB570F /* GameTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTheme.swift; sourceTree = "<group>"; };
+		A06E491B2390434900EB570F /* ChooseGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChooseGameViewController.swift; path = ../GameLogic/ChooseGameViewController.swift; sourceTree = "<group>"; };
+		A06E491F2390446900EB570F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ../GameLogic/GameViewController.swift; sourceTree = "<group>"; };
+		A06E49212390450700EB570F /* GameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFlow.swift; sourceTree = "<group>"; };
+		A06E49232390452200EB570F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		A06E4926239045E200EB570F /* PopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopUpView.h; sourceTree = "<group>"; };
+		A06E49272390460500EB570F /* PopUpViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopUpViewProtocol.h; sourceTree = "<group>"; };
+		A06E49282390462F00EB570F /* RemembArt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RemembArt-Bridging-Header.h"; sourceTree = "<group>"; };
+		A06E49292390462F00EB570F /* PopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopUpView.m; sourceTree = "<group>"; };
+		A06E492C2391002700EB570F /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		A06E493D2394EB9100EB570F /* ArcLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcLayer.swift; sourceTree = "<group>"; };
+		A06E493F2394EBC300EB570F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A06E49412394EBE600EB570F /* HolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolderView.swift; sourceTree = "<group>"; };
+		A06E49432394EBFD00EB570F /* OvalLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalLayer.swift; sourceTree = "<group>"; };
+		A06E49452394EC2700EB570F /* RectangleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleLayer.swift; sourceTree = "<group>"; };
+		A06E49472394EC4300EB570F /* TriangleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleLayer.swift; sourceTree = "<group>"; };
+		A06E495123955DB100EB570F /* CoreDataModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModule.swift; sourceTree = "<group>"; };
+		A06E49852396987800EB570F /* GameModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameModel.xcdatamodel; sourceTree = "<group>"; };
+		A06E498B2396D2C600EB570F /* AvailableGame+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailableGame+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A06E498C2396D2C600EB570F /* AvailableGame+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailableGame+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A06E498F2396D2E100EB570F /* AvailableImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailableImage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A06E49902396D2E100EB570F /* AvailableImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailableImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A06E49932399386300EB570F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B25BC3EC8C37D6AAD5C0F03F /* Pods-RemembArtTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemembArtTests.release.xcconfig"; path = "Target Support Files/Pods-RemembArtTests/Pods-RemembArtTests.release.xcconfig"; sourceTree = "<group>"; };
+		CBDE1460886BEB2ECD2E50D9 /* Pods-RemembArtTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemembArtTests.debug.xcconfig"; path = "Target Support Files/Pods-RemembArtTests/Pods-RemembArtTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DB5588C50DF6B5A060697B2D /* Pods-RemembArt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemembArt.debug.xcconfig"; path = "Target Support Files/Pods-RemembArt/Pods-RemembArt.debug.xcconfig"; sourceTree = "<group>"; };
+		F440E7B76C78B23B5B265144 /* Pods_RemembArtTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemembArtTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A05B7C26238FB4FF00E69819 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02597F911A901C62F4914511 /* Pods_RemembArt.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A05B7C3A238FB50200E69819 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CDC864E4E31A8B7D1497978 /* Pods_RemembArtTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B75435A276DCD856BF9CEB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				709C3F0D43365A2970CBC035 /* Pods_RemembArt.framework */,
+				F440E7B76C78B23B5B265144 /* Pods_RemembArtTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54B30A86B41DA8BCC2D00385 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB5588C50DF6B5A060697B2D /* Pods-RemembArt.debug.xcconfig */,
+				88459CA30A268EAED0B62742 /* Pods-RemembArt.release.xcconfig */,
+				CBDE1460886BEB2ECD2E50D9 /* Pods-RemembArtTests.debug.xcconfig */,
+				B25BC3EC8C37D6AAD5C0F03F /* Pods-RemembArtTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A05B7C20238FB4FF00E69819 = {
+			isa = PBXGroup;
+			children = (
+				A06E498F2396D2E100EB570F /* AvailableImage+CoreDataClass.swift */,
+				A06E49902396D2E100EB570F /* AvailableImage+CoreDataProperties.swift */,
+				A06E498B2396D2C600EB570F /* AvailableGame+CoreDataClass.swift */,
+				A06E498C2396D2C600EB570F /* AvailableGame+CoreDataProperties.swift */,
+				A05B7C2B238FB4FF00E69819 /* RemembArt */,
+				A05B7C40238FB50200E69819 /* RemembArtTests */,
+				A05B7C2A238FB4FF00E69819 /* Products */,
+				54B30A86B41DA8BCC2D00385 /* Pods */,
+				2B75435A276DCD856BF9CEB9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A05B7C2A238FB4FF00E69819 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A05B7C29238FB4FF00E69819 /* RemembArt.app */,
+				A05B7C3D238FB50200E69819 /* RemembArtTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A05B7C2B238FB4FF00E69819 /* RemembArt */ = {
+			isa = PBXGroup;
+			children = (
+				A06E49842396987800EB570F /* GameModel.xcdatamodeld */,
+				A06E492E2394EA6100EB570F /*  PageLoading */,
+				A06E492B2390FFDC00EB570F /* SupportFiles */,
+				A06E49252390457F00EB570F /* PopUpImageView */,
+				A06E4918239042C100EB570F /* GameLogic */,
+				A06E490F239040DF00EB570F /* ViewControllers */,
+				A05B7C33238FB50200E69819 /* Assets.xcassets */,
+				A05B7C35238FB50200E69819 /* LaunchScreen.storyboard */,
+				A05B7C38238FB50200E69819 /* Info.plist */,
+				A06E495123955DB100EB570F /* CoreDataModule.swift */,
+			);
+			path = RemembArt;
+			sourceTree = "<group>";
+		};
+		A05B7C40238FB50200E69819 /* RemembArtTests */ = {
+			isa = PBXGroup;
+			children = (
+				A05B7C41238FB50200E69819 /* RemembArtTests.swift */,
+				A05B7C43238FB50200E69819 /* Info.plist */,
+			);
+			path = RemembArtTests;
+			sourceTree = "<group>";
+		};
+		A06E490F239040DF00EB570F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A06E491B2390434900EB570F /* ChooseGameViewController.swift */,
+				A06E491F2390446900EB570F /* GameViewController.swift */,
+				A06E49122390419F00EB570F /* NewUserViewController.swift */,
+				A06E49112390419F00EB570F /* SignUpViewController.swift */,
+				A06E49102390419F00EB570F /* StartViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A06E4918239042C100EB570F /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				A06E4919239042F200EB570F /* GameTheme.swift */,
+				A06E49212390450700EB570F /* GameFlow.swift */,
+				A06E49232390452200EB570F /* Card.swift */,
+			);
+			path = GameLogic;
+			sourceTree = "<group>";
+		};
+		A06E49252390457F00EB570F /* PopUpImageView */ = {
+			isa = PBXGroup;
+			children = (
+				A06E4926239045E200EB570F /* PopUpView.h */,
+				A06E49272390460500EB570F /* PopUpViewProtocol.h */,
+				A06E49292390462F00EB570F /* PopUpView.m */,
+				A06E49282390462F00EB570F /* RemembArt-Bridging-Header.h */,
+			);
+			path = PopUpImageView;
+			sourceTree = "<group>";
+		};
+		A06E492B2390FFDC00EB570F /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A05B7C4C238FB58D00E69819 /* GoogleService-Info.plist */,
+				A05B7C2C238FB4FF00E69819 /* AppDelegate.swift */,
+				A06E492C2391002700EB570F /* Utilities.swift */,
+				A06E49932399386300EB570F /* NetworkService.swift */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		A06E492E2394EA6100EB570F /*  PageLoading */ = {
+			isa = PBXGroup;
+			children = (
+				A06E493F2394EBC300EB570F /* Colors.swift */,
+				A06E493D2394EB9100EB570F /* ArcLayer.swift */,
+				A06E49412394EBE600EB570F /* HolderView.swift */,
+				A06E49432394EBFD00EB570F /* OvalLayer.swift */,
+				A06E49452394EC2700EB570F /* RectangleLayer.swift */,
+				A06E49472394EC4300EB570F /* TriangleLayer.swift */,
+			);
+			path = " PageLoading";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A05B7C28238FB4FF00E69819 /* RemembArt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A05B7C46238FB50200E69819 /* Build configuration list for PBXNativeTarget "RemembArt" */;
+			buildPhases = (
+				6548D9ED453D9F311F641A58 /* [CP] Check Pods Manifest.lock */,
+				A05B7C25238FB4FF00E69819 /* Sources */,
+				A05B7C26238FB4FF00E69819 /* Frameworks */,
+				A05B7C27238FB4FF00E69819 /* Resources */,
+				DF1AA95C60A9418F7B529796 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RemembArt;
+			productName = RemembArt;
+			productReference = A05B7C29238FB4FF00E69819 /* RemembArt.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A05B7C3C238FB50200E69819 /* RemembArtTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A05B7C49238FB50200E69819 /* Build configuration list for PBXNativeTarget "RemembArtTests" */;
+			buildPhases = (
+				BEE3D6D77480DCA4F46E33CD /* [CP] Check Pods Manifest.lock */,
+				A05B7C39238FB50200E69819 /* Sources */,
+				A05B7C3A238FB50200E69819 /* Frameworks */,
+				A05B7C3B238FB50200E69819 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A05B7C3F238FB50200E69819 /* PBXTargetDependency */,
+			);
+			name = RemembArtTests;
+			productName = RemembArtTests;
+			productReference = A05B7C3D238FB50200E69819 /* RemembArtTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A05B7C21238FB4FF00E69819 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Daria Cheremina";
+				TargetAttributes = {
+					A05B7C28238FB4FF00E69819 = {
+						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
+					};
+					A05B7C3C238FB50200E69819 = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = A05B7C28238FB4FF00E69819;
+					};
+				};
+			};
+			buildConfigurationList = A05B7C24238FB4FF00E69819 /* Build configuration list for PBXProject "RemembArt" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A05B7C20238FB4FF00E69819;
+			productRefGroup = A05B7C2A238FB4FF00E69819 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A05B7C28238FB4FF00E69819 /* RemembArt */,
+				A05B7C3C238FB50200E69819 /* RemembArtTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A05B7C27238FB4FF00E69819 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A05B7C37238FB50200E69819 /* LaunchScreen.storyboard in Resources */,
+				A05B7C4D238FB58D00E69819 /* GoogleService-Info.plist in Resources */,
+				A05B7C34238FB50200E69819 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A05B7C3B238FB50200E69819 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6548D9ED453D9F311F641A58 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RemembArt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEE3D6D77480DCA4F46E33CD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RemembArtTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF1AA95C60A9418F7B529796 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RemembArt/Pods-RemembArt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RemembArt/Pods-RemembArt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RemembArt/Pods-RemembArt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A05B7C25238FB4FF00E69819 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A06E491A239042F200EB570F /* GameTheme.swift in Sources */,
+				A06E49482394EC4300EB570F /* TriangleLayer.swift in Sources */,
+				A06E49462394EC2700EB570F /* RectangleLayer.swift in Sources */,
+				A06E49442394EBFD00EB570F /* OvalLayer.swift in Sources */,
+				A06E492A2390462F00EB570F /* PopUpView.m in Sources */,
+				A06E492D2391002700EB570F /* Utilities.swift in Sources */,
+				A06E49222390450700EB570F /* GameFlow.swift in Sources */,
+				A06E49912396D2E100EB570F /* AvailableImage+CoreDataClass.swift in Sources */,
+				A06E49422394EBE600EB570F /* HolderView.swift in Sources */,
+				A06E498E2396D2C600EB570F /* AvailableGame+CoreDataProperties.swift in Sources */,
+				A06E49942399386300EB570F /* NetworkService.swift in Sources */,
+				A06E49862396987800EB570F /* GameModel.xcdatamodeld in Sources */,
+				A06E491C2390434900EB570F /* ChooseGameViewController.swift in Sources */,
+				A06E493E2394EB9100EB570F /* ArcLayer.swift in Sources */,
+				A06E49202390446900EB570F /* GameViewController.swift in Sources */,
+				A05B7C2D238FB4FF00E69819 /* AppDelegate.swift in Sources */,
+				A06E49922396D2E100EB570F /* AvailableImage+CoreDataProperties.swift in Sources */,
+				A06E49402394EBC300EB570F /* Colors.swift in Sources */,
+				A06E49162390419F00EB570F /* NewUserViewController.swift in Sources */,
+				A06E49152390419F00EB570F /* SignUpViewController.swift in Sources */,
+				A06E49142390419F00EB570F /* StartViewController.swift in Sources */,
+				A06E498D2396D2C600EB570F /* AvailableGame+CoreDataClass.swift in Sources */,
+				A06E495223955DB100EB570F /* CoreDataModule.swift in Sources */,
+				A06E49242390452200EB570F /* Card.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A05B7C39238FB50200E69819 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A05B7C42238FB50200E69819 /* RemembArtTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A05B7C3F238FB50200E69819 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A05B7C28238FB4FF00E69819 /* RemembArt */;
+			targetProxy = A05B7C3E238FB50200E69819 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A05B7C35238FB50200E69819 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A05B7C36238FB50200E69819 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A05B7C44238FB50200E69819 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A05B7C45238FB50200E69819 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A05B7C47238FB50200E69819 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB5588C50DF6B5A060697B2D /* Pods-RemembArt.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RemembArt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = d.cheremina.RemembArt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RemembArt/PopUpImageView/RemembArt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A05B7C48238FB50200E69819 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88459CA30A268EAED0B62742 /* Pods-RemembArt.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RemembArt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = d.cheremina.RemembArt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RemembArt/PopUpImageView/RemembArt-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A05B7C4A238FB50200E69819 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBDE1460886BEB2ECD2E50D9 /* Pods-RemembArtTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RemembArtTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = d.cheremina.RemembArtTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RemembArt.app/RemembArt";
+			};
+			name = Debug;
+		};
+		A05B7C4B238FB50200E69819 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B25BC3EC8C37D6AAD5C0F03F /* Pods-RemembArtTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RemembArtTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = d.cheremina.RemembArtTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RemembArt.app/RemembArt";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A05B7C24238FB4FF00E69819 /* Build configuration list for PBXProject "RemembArt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A05B7C44238FB50200E69819 /* Debug */,
+				A05B7C45238FB50200E69819 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A05B7C46238FB50200E69819 /* Build configuration list for PBXNativeTarget "RemembArt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A05B7C47238FB50200E69819 /* Debug */,
+				A05B7C48238FB50200E69819 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A05B7C49238FB50200E69819 /* Build configuration list for PBXNativeTarget "RemembArtTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A05B7C4A238FB50200E69819 /* Debug */,
+				A05B7C4B238FB50200E69819 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A06E49842396987800EB570F /* GameModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A06E49852396987800EB570F /* GameModel.xcdatamodel */,
+			);
+			currentVersion = A06E49852396987800EB570F /* GameModel.xcdatamodel */;
+			name = GameModel.xcdatamodeld;
+			path = " PageLoading/GameModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A05B7C21238FB4FF00E69819 /* Project object */;
+}
