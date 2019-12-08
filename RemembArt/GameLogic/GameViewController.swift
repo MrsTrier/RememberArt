@@ -143,7 +143,7 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         emoji = [:]
         unusedEmojis = theme.imagesForGame
         updateViewFromModel()
-        
+
     }
     
     private lazy var game = Concentration(numberOfCards: cardButtons.count)
@@ -152,7 +152,7 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     {
         if let index = cardButtons.index(of: sender) {
             let card = game.cards[index]
-            if card.isFaceUp {
+            if card.isFaceUp && !game.isGameComplete {
                 var popUpView = PopUpView(frame: view.frame, andImage: sender.currentImage!)
                 
                 popUpView.frame = view.frame
@@ -208,10 +208,8 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
                 if game.isGameComplete {
                     break
                 } else {
-                    var imageView = UIImageView()
-                    imageView.load(url: emoji(for: card)!)
-//                    button.addSubview(imageView)
-//                    button.setImage(imageView.image), for: .normal)
+                    button.imageView?.contentMode = .scaleAspectFill
+                    button.setImage(emoji(for: card), for: .normal)
                 }
             } else if card.isMatched {
                 button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0)
@@ -225,13 +223,13 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     }
     
     //Code for selection of the emojis to appear on cards
-    private var emoji = [Card: URL]()
+    private var emoji = [Card: UIImage]()
     private var unusedEmojis: [Image] = []
     
-    private func emoji(for card: Card) -> URL? {
+    private func emoji(for card: Card) -> UIImage? {
         if emoji[card] == nil {
             let randomStringIndex = unusedEmojis.index(unusedEmojis.startIndex, offsetBy: unusedEmojis.count.arc4random)
-            emoji[card] = unusedEmojis.remove(at: randomStringIndex).url // CHANGE TO URL!!!
+            emoji[card] = unusedEmojis.remove(at: randomStringIndex).png
         }
         return emoji[card]
     }

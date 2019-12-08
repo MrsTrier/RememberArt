@@ -56,15 +56,14 @@ class DataSourse {
                         let images = gameJson["imagesForGame"] as! [Dictionary<String, Any>]
                         currentGame.imagesForGame = []
                         for image in images {
+                            cardImage.url = URL(string: (image["url"] as! String))
                             cardImage.artist = image["artist"] as! String
                             cardImage.name = image["imageName"] as! String
                             cardImage.description = image["description"] as! String
-                            cardImage.url = URL(string: (image["url"] as! String))
                             currentGame.imagesForGame.append(cardImage)
                         }
-                        self.gamesArray.append(currentGame)
-                        currentGame.imagesForGame = []
                     }
+                    self.gamesArray.append(currentGame)
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DataReceived"), object: nil)
             }
@@ -102,36 +101,36 @@ class DataSourse {
         return gamesArray
     }
     
-    func exessGameByName(gameName: String) -> Game {
-        
-        var cardImage = Image(name: "", artist: "", description: "", url: nil, png: nil)
-        let array: [String] = ["Jackson Pollock", "Contemporary Art"]
-        let gameId = String(array.firstIndex(of: gameName)! + 1)
-
-        db.collection("GameDataBase").document(gameId).getDocument(completion: { (document, error) in
-            if error == nil {
-                if document != nil && document!.exists {
-                    let gameJson: Dictionary<String, Any> = document!.data()![gameId] as! Dictionary<String, Any>
-                    currentGame.name = gameJson["gameName"] as! String
-                    currentGame.boardColor = UIColor(hex: gameJson["boardColor"] as! String) ?? .white
-                    currentGame.cardColor = UIColor(hex: gameJson["cardColor"] as! String) ?? .gray
-                    currentGame.description = gameJson["description"] as! String
-                    let images = gameJson["imagesForGame"] as! [Dictionary<String, Any>]
-                    currentGame.imagesForGame = []
-                    for image in images {
-                        cardImage.artist = image["artist"] as! String
-                        cardImage.name = image["imageName"] as! String
-                        cardImage.description = image["description"] as! String
-                        cardImage.url = URL(string: (image["url"] as! String))
-                        currentGame.imagesForGame.append(cardImage)
-                    }
-                }
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "GameLoaded"), object: nil)
-            }
-        
-        })
-        return currentGame
-    }
+//    func exessGameByName(gameName: String) -> Game {
+//
+//        var cardImage = Image(name: "", artist: "", description: "", url: nil, png: nil)
+//        let array: [String] = ["Jackson Pollock", "Contemporary Art"]
+//        let gameId = String(array.firstIndex(of: gameName)! + 1)
+//
+//        db.collection("GameDataBase").document(gameId).getDocument(completion: { (document, error) in
+//            if error == nil {
+//                if document != nil && document!.exists {
+//                    let gameJson: Dictionary<String, Any> = document!.data()![gameId] as! Dictionary<String, Any>
+//                    currentGame.name = gameJson["gameName"] as! String
+//                    currentGame.boardColor = UIColor(hex: gameJson["boardColor"] as! String) ?? .white
+//                    currentGame.cardColor = UIColor(hex: gameJson["cardColor"] as! String) ?? .gray
+//                    currentGame.description = gameJson["description"] as! String
+//                    let images = gameJson["imagesForGame"] as! [Dictionary<String, Any>]
+//                    currentGame.imagesForGame = []
+//                    for image in images {
+//                        cardImage.artist = image["artist"] as! String
+//                        cardImage.name = image["imageName"] as! String
+//                        cardImage.description = image["description"] as! String
+//                        cardImage.url = URL(string: (image["url"] as! String))
+//                        currentGame.imagesForGame.append(cardImage)
+//                    }
+//                }
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "GameLoaded"), object: nil)
+//            }
+//
+//        })
+//        return currentGame
+//    }
 
     
     var existingGames: [String] = ["Christmas", "Halloween", "Faces", "Animals"]

@@ -31,16 +31,17 @@
         backgroundView.backgroundColor = [UIColor colorWithRed:0.72 green:0.63 blue:0.69 alpha:1.0];
         
         // Pop-Up window view
-        UIView *windowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 400, 250)];
+        UIView *windowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
         windowView.center = self.center;
         windowView.backgroundColor = [UIColor colorWithRed:0.93 green:0.90 blue:0.92 alpha:1.0];
         
         UIImageView *myView = [[UIImageView alloc] initWithFrame:CGRectMake(6,
-                                                                            47,
-                                                                            windowView.frame.size.width - 19,
-                                                                            windowView.frame.size.height - 40)];
-        //        imageView.frame = []
+                                                                            20,
+                                                                            windowView.frame.size.width - 40,
+                                                                            windowView.frame.size.height - 80)];
         myView.image = _myImage;
+        myView.contentMode = UIViewContentModeScaleAspectFit;
+
         
         
         // Buttons setup

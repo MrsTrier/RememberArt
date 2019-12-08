@@ -73,7 +73,7 @@ final class CoreDataStack {
                 let game = AvailableGame(context: context)
                 game.gameDescription = gameToSave.gameDescription
                 game.gameName = gameToSave.gameName
-                game.imagesForGame = gameToSave.imagesForGame
+                game.images = gameToSave.images
                 try? context.save()
             }
         }
@@ -83,7 +83,6 @@ final class CoreDataStack {
     var gameList: [String] = []
     var imagesForGame: [Image] = []
     var currentGames: [Game] = []
-//    var currentGame = Game(name: "", description: "", boardColor: .white, cardColor: .white, imagesForGame: [Image(name: "", artist: "", description: "", url: nil)])
 
     
     /// Загрузка дефолтных значений из хранилища при первом запуске приложения
@@ -96,56 +95,34 @@ final class CoreDataStack {
         //UserDefaults.standard.set(false, forKey: "launchedBefore") // для перезагрузки дефолтных значений
     }
     
-    @objc func safeData() {
-        self.gameList = data.returnGamesList()
-        for gameName in gameList {
-            data.exessGameByName(gameName: gameName)
-            NotificationCenter.default.addObserver(self, selector: #selector(saveGames), name: NSNotification.Name(rawValue: "GameLoaded"), object: nil)
-        }
-    }
-    
     @objc func saveGames() {
         self.currentGames = data.returnAllGames()
         saveAllData()
-        NotificationCenter.default.addObserver(self, selector: #selector(saveGame), name: NSNotification.Name(rawValue: "ImagesSaved"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(saveGame), name: NSNotification.Name(rawValue: "ImagesSaved"), object: nil)
     }
     
     func saveAllData() {
         clearData()
         persistentContainer.performBackgroundTask { (context) in
             for game in self.currentGames {
+                var arrayOfImages: [NSManagedObject] = []
+                 let gameToSave = NSEntityDescription.insertNewObject(forEntityName: "AvailableGame", into: context)
                 for image in game.imagesForGame {
                     var imageObj = NSEntityDescription.insertNewObject(forEntityName: "AvailableImage", into: context)
                     imageObj.setValue(image.name, forKey: "imageName")
                     imageObj.setValue(image.description, forKey: "imageDescription")
                     imageObj.setValue(image.artist, forKey: "artist")
                     imageObj.setValue(image.url, forKey: "url")
+                    imageObj.setValue(gameToSave, forKey: "game")
+                    arrayOfImages.append(imageObj)
                 }
+                gameToSave.setValue(game.name, forKey: "gameName")
+                gameToSave.setValue(game.description, forKey: "gameDescription")
+                gameToSave.setValue(NSSet.init(array: arrayOfImages), forKey: "images")
+
             }
             try? context.save()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImagesSaved"), object: nil)
-        }
-    }
-    
-    @objc func saveGame() {
-        persistentContainer.performBackgroundTask { (context) in
-            for currentGame in self.currentGames {
-                var arrayOfImages: [AvailableImage] = []
-                var game = NSEntityDescription.insertNewObject(forEntityName: "AvailableGame", into: context)
-                game.setValue(currentGame.name, forKey: "gameName")
-                game.setValue(currentGame.description, forKey: "gameDescription")
-                var images = self.loadFromMemoryImages()
-                for imageFromDB in currentGame.imagesForGame {
-                    for obj in images {
-                        if obj.imageName == imageFromDB.name {
-                            arrayOfImages.append(obj)
-                            break
-                        }
-                    }
-                }
-                game.setValue(arrayOfImages, forKey: "imagesForGame")
-            }
-            try? context.save()
         }
         UserDefaults.standard.set(true, forKey: "launchedBefore")
     }

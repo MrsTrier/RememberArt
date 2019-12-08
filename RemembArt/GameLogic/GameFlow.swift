@@ -65,7 +65,7 @@ class Concentration
                 if cards[matchIndex] == cards[index] {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
-                    score += 2
+                    score += 3
                 }
                 cards[index].isFaceUp = true
             } else {

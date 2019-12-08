@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G84" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AvailableGame" representedClassName=".AvailableGame" syncable="YES">
+    <entity name="AvailableGame" representedClassName="AvailableGame" syncable="YES">
         <attribute name="gameDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gameName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="setOfImages" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvailableImage" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AvailableImage" inverseName="game" inverseEntity="AvailableImage" syncable="YES"/>
     </entity>
-    <entity name="AvailableImage" representedClassName=".AvailableImage" syncable="YES">
+    <entity name="AvailableImage" representedClassName="AvailableImage" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="statusSpesial" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="URI" syncable="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvailableGame" inverseName="images" inverseEntity="AvailableGame" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AvailableGame" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="AvailableImage" positionX="-54" positionY="18" width="128" height="120"/>
+        <element name="AvailableGame" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="AvailableImage" positionX="-54" positionY="9" width="128" height="120"/>
     </elements>
 </model>

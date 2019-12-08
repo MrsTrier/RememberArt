@@ -13,10 +13,11 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
         
     }
     
-
     var utils = Utilities()
     private var games = [AvailableGame]()
     private let stack = CoreDataStack.shared
+    var gameData = Game(name: "", description: "", boardColor: .white, cardColor: .white, imagesForGame: [])
+
 
     var gameList: [String] = []
     
@@ -118,57 +119,55 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
 
     
     @objc func changeTheme(_ sender: UIButton) {
-        if let theme = getThemeFromButton(sender) {
-            let cvc = ConcentrationViewController()
-            cvc.theme = theme
-            navigationController?.pushViewController(cvc, animated: true)
+        let themeName = sender.currentTitle
+        var game: AvailableGame = returnGameWithName(themeName!)!
+
+        self.gameData = getThemeFromButton(game: game)!
+        fillWithUIImages(game: game)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadGame), name: NSNotification.Name(rawValue: "ImagesLoaded"), object: nil)
+    }
+    
+    @objc func loadGame() {
+        let cvc = ConcentrationViewController()
+        cvc.theme = gameData
+        navigationController?.pushViewController(cvc, animated: true)
+    }
+    
+    func fillWithUIImages(game: AvailableGame) {
+        var myUIImages : [Image] = []
+        for image in game.images! {
+            var networkServece = NetworkService()            
+            networkServece.downloadImage(url: (image as! AvailableImage).url!) { uiImage, error in
+                
+                DispatchQueue.main.async {
+                    guard let uiImage = uiImage else {
+                        return
+                    }
+                    var themeImage = Image(name: (image as! AvailableImage).imageName!, artist: (image as! AvailableImage).artist!, description: (image as! AvailableImage).imageDescription!, url: (image as! AvailableImage).url, png: uiImage)
+                    myUIImages.append(themeImage)
+                    if myUIImages.count >= 10 {
+                        self.gameData.imagesForGame = myUIImages
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImagesLoaded"), object: nil)
+                    }
+                }
+            }
         }
     }
     
-    private func getThemeFromButton(_ sender: UIButton) -> Game? {
-        //This is terrible behaviour. I'm identifying the theme to pick based off of the button's name, which makes the code very brittle. However, it will do for our purposes for the moment.
-        let themeName = sender.currentTitle
-        var theme: Game?
-//        let dataSource = DataSourse()
-//        dataSource.exessGameByName(gameName: "Jackson Pollock")
-//        theme = dataSource.existingGamesData[themeName!]!
-//        let group = DispatchGroup()
-        var game: AvailableGame? = returnGameWithName(themeName!)
-//        theme = returnGameWithName(themeName!)
-        theme?.name = game!.gameName!
-        theme?.description = game!.gameDescription!
-        theme?.boardColor = UIColor(red:0.04, green:0.17, blue:0.44, alpha:1.0)
-        theme?.cardColor = .white
-        for image in game!.imagesForGame! {
-            var networkServece = NetworkService()
-            var myUIImage = UIImage()
-            networkServece.downloadImage(url: image.url!) { uiImage, error in
-                DispatchQueue.main.async {
-                    
-                    guard let uiImage = uiImage else {
-//                        alertMessage = "\(String(describing: error!.localizedDescription))"
-                        return
-                    }
-                    myUIImage = uiImage
-//                    self.imageModel.image = uiImage
-//                    alertMessage = "Картинка скачана"
-//                    self.output?.prepareAlert(with: alertMessage)
-                }
-            }
-            
-            var themeImage = Image(name: image.imageName!, artist: image.artist!, description: image.imageDescription!, url: image.url, png: myUIImage)
-            theme!.imagesForGame.append(themeImage)
-        }
-//        theme = dataSource.exessGameByName(gameName: themeName!)
+    func getThemeFromButton(game: AvailableGame) -> Game? {
+    //This is terrible behaviour. I'm identifying the theme to pick based off of the button's name, which makes the code very brittle. However, it will do for our purposes for the moment.
+    
+        var theme = Game(name: game.gameName!, description: game.gameDescription!, boardColor: UIColor(red:0.04, green:0.17, blue:0.44, alpha:1.0), cardColor: .white, imagesForGame: [])
         return theme
     }
     
     func returnGameWithName(_ name: String) -> AvailableGame? {
+        var neededGame: AvailableGame
         for game in games {
             if (game.gameName == name) {
-                return game as AvailableGame?
+                neededGame = game
+                return neededGame
             }
-            return nil
         }
         return nil
     }
