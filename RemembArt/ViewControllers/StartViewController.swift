@@ -10,6 +10,7 @@ import UIKit
 
 class StartView: UIViewController {
     
+    var data = DataSource()
     
     var imageView = UIImageView()
     
@@ -22,6 +23,10 @@ class StartView: UIViewController {
         return barHeight + statusBarHeight
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        UIApplication.shared.endIgnoringInteractionEvents()
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let screenWidth = view.frame.size.width
@@ -42,7 +47,6 @@ class StartView: UIViewController {
         headerView.axis = .vertical
         headerView.distribution = .fillEqually
         headerView.alignment = .fill
-//                headerView.addBackground(color: UIColor(red:0.93, green:0.74, blue:0.42, alpha:1.0))
         
         let playButton = UIButton()
         playButton.backgroundColor = .clear
@@ -76,7 +80,6 @@ class StartView: UIViewController {
     @objc func createGameTapped() {
         let cvc = SignUpViewController()
         navigationController?.pushViewController(cvc, animated: true)
-
     }
 }
 

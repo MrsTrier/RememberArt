@@ -17,7 +17,10 @@ struct Image {
     var png: UIImage?
 }
 
-var currentGame = Game(name: "", description: "", boardColor: .white, cardColor: .white, imagesForGame: [])
+struct Artist {
+    var name: String
+    var works: [Image]
+}
 
 struct Game {
     /// The name of the theme (i.e. to show it on screen or something)
@@ -34,43 +37,74 @@ struct Game {
     var imagesForGame: [Image]
 }
 
-class DataSourse {
+class DataSource: NSObject {
+    
+    var currentGame = Game(name: "", description: "", boardColor: .white, cardColor: .white, imagesForGame: [])
+    var currentArtist = Artist(name: "", works: [])
+    
+    var pickerData = [""]
+    
+    var arrayOfImg: Array<String> = ["sky", "ira", "ezha", "photo", "vorona", "flower","winter","Iam", "painting", "pesa"]
     
     let db = Firestore.firestore()
     var gamesList: [String] = []
     var gamesArray: [Game] = []
+    var artistsArray: [Artist] = []
 
-    func exessFullData() -> [Game] {
+    func exessFullGameData() {
         var cardImage = Image(name: "", artist: "", description: "", url: nil, png: nil)
-
         
         db.collection("GameDataBase").getDocuments { (snapshot, error) in
             if error == nil && snapshot != nil {
                 for document in snapshot!.documents {
                     for data in document.data() {
                         var gameJson: Dictionary<String, Any> = data.value as! Dictionary<String, Any>
-                        currentGame.name = gameJson["gameName"] as! String
-                        currentGame.boardColor = UIColor(hex: gameJson["boardColor"] as! String) ?? .white
-                        currentGame.cardColor = UIColor(hex: gameJson["cardColor"] as! String) ?? .gray
-                        currentGame.description = gameJson["description"] as! String
+                        self.currentGame.name = gameJson["gameName"] as! String
+                        self.currentGame.boardColor = UIColor(hex: gameJson["boardColor"] as! String) ?? .white
+                        self.currentGame.cardColor = UIColor(hex: gameJson["cardColor"] as! String) ?? .gray
+                        self.currentGame.description = gameJson["description"] as! String
                         let images = gameJson["imagesForGame"] as! [Dictionary<String, Any>]
-                        currentGame.imagesForGame = []
+                        self.currentGame.imagesForGame = []
                         for image in images {
                             cardImage.url = URL(string: (image["url"] as! String))
                             cardImage.artist = image["artist"] as! String
                             cardImage.name = image["imageName"] as! String
                             cardImage.description = image["description"] as! String
-                            currentGame.imagesForGame.append(cardImage)
+                            self.currentGame.imagesForGame.append(cardImage)
                         }
                     }
-                    self.gamesArray.append(currentGame)
+                    self.gamesArray.append(self.currentGame)
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DataReceived"), object: nil)
             }
         }
-        return gamesArray
     }
     
+    func exessFullImageData() {
+        var cardImage = Image(name: "", artist: "", description: "", url: nil, png: nil)
+        
+        db.collection("ImageStorage").getDocuments { (snapshot, error) in
+            if error == nil && snapshot != nil {
+                for document in snapshot!.documents {
+                    for artistData in document.data() {
+                        var artistJson: Dictionary<String, Any> = artistData.value as! Dictionary<String, Any>
+                        self.currentArtist.name = artistJson["artistName"] as! String
+                        let works = artistJson["works"] as! [Dictionary<String, Any>]
+                        self.currentArtist.works = []
+                        for picture in works {
+                            cardImage.url = URL(string: (picture["url"] as! String))
+                            cardImage.artist = self.currentArtist.name
+                            cardImage.name = picture["imageName"] as! String
+                            cardImage.description = picture["imageDescription"] as! String
+                            self.currentArtist.works.append(cardImage)
+                        }
+                    }
+                    self.artistsArray.append(self.currentArtist)
+                }
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImageDataReceived"), object: nil)
+            }
+        }
+    }
     
     func exessGamesList() -> [String] {
         
@@ -97,90 +131,21 @@ class DataSourse {
     func returnGame() -> Game {
         return currentGame
     }
+    
     func returnAllGames() -> [Game] {
         return gamesArray
     }
-    
-//    func exessGameByName(gameName: String) -> Game {
-//
-//        var cardImage = Image(name: "", artist: "", description: "", url: nil, png: nil)
-//        let array: [String] = ["Jackson Pollock", "Contemporary Art"]
-//        let gameId = String(array.firstIndex(of: gameName)! + 1)
-//
-//        db.collection("GameDataBase").document(gameId).getDocument(completion: { (document, error) in
-//            if error == nil {
-//                if document != nil && document!.exists {
-//                    let gameJson: Dictionary<String, Any> = document!.data()![gameId] as! Dictionary<String, Any>
-//                    currentGame.name = gameJson["gameName"] as! String
-//                    currentGame.boardColor = UIColor(hex: gameJson["boardColor"] as! String) ?? .white
-//                    currentGame.cardColor = UIColor(hex: gameJson["cardColor"] as! String) ?? .gray
-//                    currentGame.description = gameJson["description"] as! String
-//                    let images = gameJson["imagesForGame"] as! [Dictionary<String, Any>]
-//                    currentGame.imagesForGame = []
-//                    for image in images {
-//                        cardImage.artist = image["artist"] as! String
-//                        cardImage.name = image["imageName"] as! String
-//                        cardImage.description = image["description"] as! String
-//                        cardImage.url = URL(string: (image["url"] as! String))
-//                        currentGame.imagesForGame.append(cardImage)
-//                    }
-//                }
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "GameLoaded"), object: nil)
-//            }
-//
-//        })
-//        return currentGame
-//    }
 
-    
-    var existingGames: [String] = ["Christmas", "Halloween", "Faces", "Animals"]
+    func returnImageData() -> [Artist] {
+        return artistsArray
+    }
     
     var createdGames: [String] = []
     
-    
-    
-//    var existingGamesData: [String : Game] = [
-//        "Christmas":
-//            Game(name: "Christmas",
-//                 description: "",
-//                 boardColor: #colorLiteral(red: 0.9678710938, green: 0.9678710938, blue: 0.9678710938, alpha: 1),
-//                 cardColor: #colorLiteral(red: 0.631328125, green: 0.1330817629, blue: 0.06264670187, alpha: 1),
-//                 imagesForGame: [Image(name: "sky", artist:"dasha", description: "", url: nil, png: nil),
-//                                 Image(name: "ira", artist:"dasha", description: "", url: nil, ),
-//                                 Image(name: "ezha", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "photo", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "vorona", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "flower", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "winter", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "Iam", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "painting", artist:"dasha", description: "", url: nil),
-//                                 Image(name: "pesa", artist:"dasha", description: "", url: nil)]
-//        ),
-//        "Halloween":
-//            Game(name: "Halloween",
-//                 description: "",
-//                 boardColor: #colorLiteral(red: 1, green: 0.8556062016, blue: 0.5505848702, alpha: 1),
-//                 cardColor: #colorLiteral(red: 0.7928710937, green: 0.373980853, blue: 0, alpha: 1),
-//                 imagesForGame: [ Image(name: "sky", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "ira", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "ezha", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "photo", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "vorona", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "flower", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "winter", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "Iam", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "painting", artist:"dasha", description: "", url: nil),
-//                                  Image(name: "pesa", artist:"dasha", description: "", url: nil)])
-//    ]
 }
 
 
-extension DataSourse {
-    
-//    class func StringFromUIColor(color: UIColor) -> String {
-//        let components = CGColor.components(color.cgColor)
-//        return "[\(components[0]), \(components[1]), \(components[2]), \(components[3])]"
-//    }
+extension DataSource {
     
     func UIColorFromString(string: String) -> UIColor {
         let componentsString = string.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
@@ -190,7 +155,6 @@ extension DataSourse {
                        blue: CGFloat((components[2] as NSString).floatValue),
                        alpha: CGFloat((components[3] as NSString).floatValue))
     }
-    
 }
 
 extension UIColor {
@@ -219,4 +183,19 @@ extension UIColor {
         
         return nil
     }
+    
+}
+
+
+extension DataSource: UIPickerViewDataSource {
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
 }

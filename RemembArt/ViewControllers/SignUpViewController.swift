@@ -27,17 +27,14 @@ class SignUpViewController: UIViewController {
         
         let logInBotton = UIButton()
         logInBotton.setTitleColor(.blue, for: .normal)
-//        logInBotton.tintColor = UIColor(red:0.02, green:0.03, blue:0.18, alpha:1.0)
         logInBotton.setTitle("Log in", for: .normal)
         
         let signUpButton = UIButton()
         signUpButton.setTitleColor(.blue, for: .normal)
-
-        signUpButton.tintColor = UIColor(red:0.02, green:0.03, blue:0.18, alpha:1.0)
         signUpButton.setTitle("Sign Up", for: .normal)
         
-        logInBotton.addTarget(self, action: #selector(signUpButtonTapped(_:)), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped(_:)), for: .touchUpInside)
+        logInBotton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         
         headerView.addArrangedSubview(logInBotton)
         headerView.addArrangedSubview(signUpButton)
@@ -45,16 +42,10 @@ class SignUpViewController: UIViewController {
         return headerView
     }
     
-    @objc func logInBottonTapped() {
-        
-    }
-    
-    
-    @objc func signUpButtonTapped(_ sender: UIButton) {
+    @objc func buttonTapped(_ sender: UIButton) {
         let cvc = AuthoriseUserViewController(sender.currentTitle)
         navigationController?.pushViewController(cvc, animated: true)
     }
-
 
 }
 

@@ -30,7 +30,7 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     
     var scoreLabel = UILabel()
     var gameCompleteLabel = UILabel()
-    var newGameButton = UIButton()
+//    var newGameButton = UIButton()
 
     var GameCardsStack = UIStackView()
     var GameCardsRowStacks = UIStackView()
@@ -43,19 +43,17 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setUpNavBarItems()
 
+        UIApplication.shared.endIgnoringInteractionEvents()
         scoreLabel.frame = CGRect(x: (view.frame.width / 2 - 20), y: topDistance, width: 100, height: 30)
 
     }
     
     override func viewDidLoad() {
-        //use autolayout instead
-
-        newGameButton.frame = CGRect(x: (view.frame.width / 2 - 20), y: 100, width: 51, height: 30)
+//        newGameButton.frame = CGRect(x: (view.frame.width / 2 - 20), y: 100, width: 51, height: 30)
         var array: [UIStackView] = []
-        
         GameCardsStack.translatesAutoresizingMaskIntoConstraints = false
-        
 
         for _ in 0..<5 {
             GameCardsRowStacks = CardsRow()
@@ -75,6 +73,28 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         setupConstraints()
     }
 
+    func setUpNavBarItems() {
+        let titleView = theme.name
+        navigationItem.title = titleView
+        navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back(_ :)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func back(_ sender: UIBarButtonItem) {
+        
+        let popUpView = PopUpView(frame: view.frame, andImage: UIImage(named: "finish")!)
+        
+        popUpView.frame = view.frame
+        popUpView.delegate = self
+        popUpView.makeVisible()
+        
+        view.addSubview(popUpView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let  startvc =  self.navigationController?.viewControllers.filter({$0 is StartView}).first
+            self.navigationController?.popToViewController(startvc!, animated: true)
+        }
+    }
     
     func CardsRow() -> UIStackView {
         let headerView = UIStackView()
@@ -107,39 +127,39 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     }
     
     func setupConstraints() {
-        newGameButton.addTarget(self, action: #selector(touchNewGameButton(_:)), for: .touchUpInside)
+//        newGameButton.addTarget(self, action: #selector(touchNewGameButton(_:)), for: .touchUpInside)
         
         view.addSubview(gameCompleteLabel)
         view.addSubview(GameCardsStack)
-        view.addSubview(newGameButton)
+//        view.addSubview(newGameButton)
         view.addSubview(scoreLabel)
         
-        newGameButton.translatesAutoresizingMaskIntoConstraints = false
+//        newGameButton.translatesAutoresizingMaskIntoConstraints = false
         
         GameCardsStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
         GameCardsStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
         GameCardsStack.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor).isActive = true
         GameCardsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         
-        newGameButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        newGameButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        newGameButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+//        newGameButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        newGameButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        newGameButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
 
     }
-    
-    func chooseRandomGameTheme() {
-        let ds = DataSourse()
-        let randomGameThemeInt = ds.existingGames.count.arc4random
-//        theme = ds.existingGamesData[ds.existingGames[randomGameThemeInt]] ?? ds.existingGamesData["Halloween"]
-    }
+//
+//    func chooseRandomGameTheme() {
+//        let ds = DataSourse()
+//        let randomGameThemeInt = ds.existingGames.count.arc4random
+////        theme = ds.existingGamesData[ds.existingGames[randomGameThemeInt]] ?? ds.existingGamesData["Halloween"]
+//    }
     
     private func implementTheme() {
         self.view.backgroundColor = theme.boardColor
         scoreLabel.textColor = theme.cardColor
         scoreLabel.text = ""
         gameCompleteLabel.textColor = theme.cardColor
-        newGameButton.backgroundColor = theme.cardColor
-        newGameButton.setTitleColor(theme.boardColor, for: UIControl.State.normal)
+//        newGameButton.backgroundColor = theme.cardColor
+//        newGameButton.setTitleColor(theme.boardColor, for: UIControl.State.normal)
         emoji = [:]
         unusedEmojis = theme.imagesForGame
         updateViewFromModel()
@@ -150,10 +170,10 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     
     @objc func touchCard(_ sender: UIButton)
     {
-        if let index = cardButtons.index(of: sender) {
+        if let index = cardButtons.firstIndex(of: sender) {
             let card = game.cards[index]
             if card.isFaceUp && !game.isGameComplete {
-                var popUpView = PopUpView(frame: view.frame, andImage: sender.currentImage!)
+                let popUpView = PopUpView(frame: view.frame, andImage: sender.currentImage!)
                 
                 popUpView.frame = view.frame
                 popUpView.delegate = self
@@ -170,13 +190,15 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         }
     }
     
-    @objc private func touchNewGameButton(_ sender: UIButton) {
-        if game.isGameComplete {
-            chooseRandomGameTheme()
-            game = Concentration(numberOfCards: cardButtons.count)
-            updateViewFromModel()
-        }
-    }
+//    @objc private func touchNewGameButton(_ sender: UIButton) {
+//        if game.isGameComplete {
+//            chooseRandomGameTheme()
+//            game = Concentration(numberOfCards: cardButtons.count)
+//            updateViewFromModel()
+//        }
+//    }
+    
+    
     
     private func updateViewFromModel()
     {
@@ -188,17 +210,22 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         scoreLabel.attributedText = attributedString
         
         if game.isGameComplete {
-            gameCompleteLabel.frame = CGRect(x: (view.frame.width / 4), y: (view.frame.height / 2.3), width: (view.frame.width / 1.3), height: 100)
-            gameCompleteLabel.backgroundColor = .white
-            gameCompleteLabel.layer.cornerRadius = 50
-            gameCompleteLabel.text = "Well done! Care to try again?"
-            newGameButton.backgroundColor = theme.cardColor
-            newGameButton.setTitle("New Game", for: .normal)
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            var popUpView = PopUpView(frame: view.frame, andImage: UIImage(named: "congratulation")!)
+            
+            popUpView.frame = view.frame
+            popUpView.delegate = self
+            popUpView.makeVisible()
+            view.addSubview(popUpView)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let  startvc =  self.navigationController?.viewControllers.filter({$0 is StartView}).first
+                self.navigationController?.popToViewController(startvc!, animated: true)
+            }
         } else {
             gameCompleteLabel.text = ""
             gameCompleteLabel.backgroundColor = .clear
-            newGameButton.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0)
-            newGameButton.setTitle("", for: .normal)
+//            newGameButton.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0)
+//            newGameButton.setTitle("", for: .normal)
         }
         for index in cardButtons.indices {
             let card = game.cards[index]

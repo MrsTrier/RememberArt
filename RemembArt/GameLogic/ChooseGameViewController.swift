@@ -40,11 +40,9 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
         games = stack.loadFromMemory()
         
         let filter = filterStack(topDistance)
-        var headerView = gameTypesStack(point: topDistance)
+        let headerView = gameTypesStack(point: topDistance)
         view.addSubview(filter)
         view.addSubview(headerView)
-//        data.exessGamesList()
-
     }
     
     var holderView = HolderView(frame: .zero)
@@ -79,12 +77,12 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
         headerView.alignment = .fill
         headerView.spacing = 10.0
         
-        var myGames = UIButton()
+        let myGames = UIButton()
         myGames.backgroundColor = UIColor(red:0.95, green:0.85, blue:0.46, alpha:1.0)
         myGames.titleLabel?.font = UIFont(name: "Copperplate-Bold", size: 20)
         myGames.setTitle("My Games", for: .normal)
         
-        var allGames = UIButton()
+        let allGames = UIButton()
         allGames.backgroundColor = UIColor(red:0.95, green:0.85, blue:0.46, alpha:1.0)
         allGames.titleLabel?.font = UIFont(name: "Copperplate-Bold", size: 20)
         allGames.setTitle("All Games", for: .normal)
@@ -119,8 +117,9 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
 
     
     @objc func changeTheme(_ sender: UIButton) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
         let themeName = sender.currentTitle
-        var game: AvailableGame = returnGameWithName(themeName!)!
+        let game: AvailableGame = returnGameWithName(themeName!)!
 
         self.gameData = getThemeFromButton(game: game)!
         fillWithUIImages(game: game)
@@ -136,14 +135,14 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
     func fillWithUIImages(game: AvailableGame) {
         var myUIImages : [Image] = []
         for image in game.images! {
-            var networkServece = NetworkService()            
+            let networkServece = NetworkService()
             networkServece.downloadImage(url: (image as! AvailableImage).url!) { uiImage, error in
                 
                 DispatchQueue.main.async {
                     guard let uiImage = uiImage else {
                         return
                     }
-                    var themeImage = Image(name: (image as! AvailableImage).imageName!, artist: (image as! AvailableImage).artist!, description: (image as! AvailableImage).imageDescription!, url: (image as! AvailableImage).url, png: uiImage)
+                    let themeImage = Image(name: (image as! AvailableImage).imageName!, artist: (image as! AvailableImage).artist!, description: (image as! AvailableImage).imageDescription!, url: (image as! AvailableImage).url, png: uiImage)
                     myUIImages.append(themeImage)
                     if myUIImages.count >= 10 {
                         self.gameData.imagesForGame = myUIImages
@@ -157,7 +156,7 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
     func getThemeFromButton(game: AvailableGame) -> Game? {
     //This is terrible behaviour. I'm identifying the theme to pick based off of the button's name, which makes the code very brittle. However, it will do for our purposes for the moment.
     
-        var theme = Game(name: game.gameName!, description: game.gameDescription!, boardColor: UIColor(red:0.04, green:0.17, blue:0.44, alpha:1.0), cardColor: .white, imagesForGame: [])
+        let theme = Game(name: game.gameName!, description: game.gameDescription!, boardColor: UIColor(red:0.04, green:0.17, blue:0.44, alpha:1.0), cardColor: .white, imagesForGame: [])
         return theme
     }
     

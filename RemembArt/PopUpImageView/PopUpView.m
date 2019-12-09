@@ -41,8 +41,6 @@
                                                                             windowView.frame.size.height - 80)];
         myView.image = _myImage;
         myView.contentMode = UIViewContentModeScaleAspectFit;
-
-        
         
         // Buttons setup
         UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(4,
@@ -55,7 +53,7 @@
         
         
         // Add subviews to Pop-Up view
-        //        [windowView addSubview:self.];
+        // [windowView addSubview:self.];
         [windowView addSubview:myView];
         [windowView addSubview:okButton];
         
@@ -77,7 +75,7 @@
 }
 
 /**
- When OK button is tapped, call delegate to create new task cell; close the view
+ //добавить комменты!!!!
  */
 - (void)okButtonTapped
 {

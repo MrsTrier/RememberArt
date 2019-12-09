@@ -108,24 +108,24 @@ class AuthoriseUserViewController: UIViewController {
     }
 
     @objc func logInButtonTapped() {
-        let cleanPassword = passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let cleanEmail = logInField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if cleanPassword == "" || cleanEmail == "" {
-            // При вводе данных пользователь допустил ошибку
-            self.showError("Email или пароль введены с ошибкой")
-        }
-        
-        Auth.auth().signIn(withEmail: cleanEmail!, password: cleanPassword!) { (result, error) in
-            if error != nil {
-                self.errorLable.text = error!.localizedDescription
-                self.errorLable.alpha = 1
-            } else {
+//        let cleanPassword = passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let cleanEmail = logInField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+//        if cleanPassword == "" || cleanEmail == "" {
+//            // При вводе данных пользователь допустил ошибку
+//            self.showError("Email или пароль введены с ошибкой")
+//        }
+//
+//        Auth.auth().signIn(withEmail: cleanEmail!, password: cleanPassword!) { (result, error) in
+//            if error != nil {
+//                self.errorLable.text = error!.localizedDescription
+//                self.errorLable.alpha = 1
+//            } else {
                 // Поздравляю с авторизацией!
                 
                 // Смена экрана
                 self.showViewForLogedinUser()
-            }
-        }
+//            }
+//        }
     }
     
     /// Проверяет коректность пользовательской информации в текстовых полях
@@ -177,7 +177,7 @@ class AuthoriseUserViewController: UIViewController {
                             self.showError("Произошла ошибка при сохранении имени и фамилии")
                         } else {
                             // Смена экрана
-                            self.showViewForLogedinUser()
+                            self.showViewForNewUserTologin()
                         }
                     })
                     
@@ -186,11 +186,16 @@ class AuthoriseUserViewController: UIViewController {
         }
     }
     
-    func showViewForLogedinUser() {
+    func showViewForNewUserTologin() {
         let  startvc =  self.navigationController?.viewControllers.filter({$0 is StartView}).first
         let  authvc =  self.navigationController?.viewControllers.filter({$0 is AuthoriseUserViewController}).first
         navigationController?.popToViewController(startvc ?? authvc!, animated: true)
-
+        
+    }
+    
+    func showViewForLogedinUser() {
+        var vc = CreateGameViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func showError(_ message: String) {

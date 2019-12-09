@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         CoreDataStack.shared.firstLaunchSettings()
-
+        
         let navigationController = UINavigationController.init(rootViewController: StartView())
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
