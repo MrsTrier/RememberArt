@@ -9,12 +9,12 @@
 import UIKit
 
 class ConcentrationViewController: UIViewController, PopUpViewProtocol {
-    
-
-    func taskDidCreated(withTitle title: String!, desc: String!) {
-        
+    func shureTapped() {
+        let  startvc =  self.navigationController?.viewControllers.filter({$0 is StartView}).first
+        self.navigationController?.popToViewController(startvc!, animated: true)
     }
     
+
     func taskCreationDidCanceled() {
         
     }
@@ -51,6 +51,8 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+
 //        newGameButton.frame = CGRect(x: (view.frame.width / 2 - 20), y: 100, width: 51, height: 30)
         var array: [UIStackView] = []
         GameCardsStack.translatesAutoresizingMaskIntoConstraints = false
@@ -83,17 +85,13 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     
     @objc func back(_ sender: UIBarButtonItem) {
         
-        let popUpView = PopUpView(frame: view.frame, andImage: UIImage(named: "finish")!)
+        let popUpView = PopUpView(frame: view.frame, andImage: UIImage(named: "finish")!, andType: ["exit", "Do you realy want to exit the game?"])
         
         popUpView.frame = view.frame
         popUpView.delegate = self
         popUpView.makeVisible()
         
         view.addSubview(popUpView)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let  startvc =  self.navigationController?.viewControllers.filter({$0 is StartView}).first
-            self.navigationController?.popToViewController(startvc!, animated: true)
-        }
     }
     
     func CardsRow() -> UIStackView {
@@ -131,36 +129,22 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         
         view.addSubview(gameCompleteLabel)
         view.addSubview(GameCardsStack)
-//        view.addSubview(newGameButton)
         view.addSubview(scoreLabel)
         
-//        newGameButton.translatesAutoresizingMaskIntoConstraints = false
         
         GameCardsStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
         GameCardsStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
         GameCardsStack.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor).isActive = true
         GameCardsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
-        
-//        newGameButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        newGameButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        newGameButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
 
     }
-//
-//    func chooseRandomGameTheme() {
-//        let ds = DataSourse()
-//        let randomGameThemeInt = ds.existingGames.count.arc4random
-////        theme = ds.existingGamesData[ds.existingGames[randomGameThemeInt]] ?? ds.existingGamesData["Halloween"]
-//    }
     
     private func implementTheme() {
         self.view.backgroundColor = theme.boardColor
         scoreLabel.textColor = theme.cardColor
         scoreLabel.text = ""
         gameCompleteLabel.textColor = theme.cardColor
-//        newGameButton.backgroundColor = theme.cardColor
-//        newGameButton.setTitleColor(theme.boardColor, for: UIControl.State.normal)
-        emoji = [:]
+        pickture = [:]
         unusedEmojis = theme.imagesForGame
         updateViewFromModel()
 
@@ -173,7 +157,7 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         if let index = cardButtons.firstIndex(of: sender) {
             let card = game.cards[index]
             if card.isFaceUp && !game.isGameComplete {
-                let popUpView = PopUpView(frame: view.frame, andImage: sender.currentImage!)
+                let popUpView = PopUpView(frame: view.frame, andImage: sender.currentImage!, andType: ["default", "\((artWork(for: card)?.name)!)"])
                 
                 popUpView.frame = view.frame
                 popUpView.delegate = self
@@ -190,16 +174,6 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         }
     }
     
-//    @objc private func touchNewGameButton(_ sender: UIButton) {
-//        if game.isGameComplete {
-//            chooseRandomGameTheme()
-//            game = Concentration(numberOfCards: cardButtons.count)
-//            updateViewFromModel()
-//        }
-//    }
-    
-    
-    
     private func updateViewFromModel()
     {
         let scoreAttributes: [NSAttributedString.Key: Any] = [
@@ -211,21 +185,19 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
         
         if game.isGameComplete {
             UIApplication.shared.beginIgnoringInteractionEvents()
-            var popUpView = PopUpView(frame: view.frame, andImage: UIImage(named: "congratulation")!)
-            
+            var popUpView = PopUpView(frame: view.frame, andImage: UIImage(named: "congratulation")!, andType: ["standart", "You finished the game with a score: \(game.score)"])
             popUpView.frame = view.frame
             popUpView.delegate = self
             popUpView.makeVisible()
             view.addSubview(popUpView)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 let  startvc =  self.navigationController?.viewControllers.filter({$0 is StartView}).first
                 self.navigationController?.popToViewController(startvc!, animated: true)
             }
         } else {
             gameCompleteLabel.text = ""
             gameCompleteLabel.backgroundColor = .clear
-//            newGameButton.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0)
-//            newGameButton.setTitle("", for: .normal)
+            
         }
         for index in cardButtons.indices {
             let card = game.cards[index]
@@ -236,7 +208,7 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
                     break
                 } else {
                     button.imageView?.contentMode = .scaleAspectFill
-                    button.setImage(emoji(for: card), for: .normal)
+                    button.setImage(artWork(for: card)?.png, for: .normal)
                 }
             } else if card.isMatched {
                 button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0)
@@ -250,15 +222,16 @@ class ConcentrationViewController: UIViewController, PopUpViewProtocol {
     }
     
     //Code for selection of the emojis to appear on cards
-    private var emoji = [Card: UIImage]()
+    private var pickture = [Card: Image]()
     private var unusedEmojis: [Image] = []
     
-    private func emoji(for card: Card) -> UIImage? {
-        if emoji[card] == nil {
+    private func artWork(for card: Card) -> Image? {
+        if pickture[card] == nil {
             let randomStringIndex = unusedEmojis.index(unusedEmojis.startIndex, offsetBy: unusedEmojis.count.arc4random)
-            emoji[card] = unusedEmojis.remove(at: randomStringIndex).png
+//            pickture[card] = unusedEmojis.remove(at: randomStringIndex).png
+            pickture[card] = unusedEmojis.remove(at: randomStringIndex)
         }
-        return emoji[card]
+        return pickture[card]
     }
 }
 
@@ -287,36 +260,5 @@ extension UIImageView {
         }
         return image
     }
-}
-
-extension UIView {
-    
-    func anchorToTop(top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil) {
-        
-        anchorWithConstantsToTop(top: top, left: left, bottom: bottom, right: right, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
-    }
-    
-    func anchorWithConstantsToTop(top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, topConstant: CGFloat = 0, leftConstant: CGFloat = 0, bottomConstant: CGFloat = 0, rightConstant: CGFloat = 0) {
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        if let top = top {
-            topAnchor.constraint(equalTo: top, constant: topConstant).isActive = true
-        }
-        
-        if let bottom = bottom {
-            bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant).isActive = true
-        }
-        
-        if let left = left {
-            leftAnchor.constraint(equalTo: left, constant: leftConstant).isActive = true
-        }
-        
-        if let right = right {
-            rightAnchor.constraint(equalTo: right, constant: -rightConstant).isActive = true
-        }
-        
-    }
-    
 }
 

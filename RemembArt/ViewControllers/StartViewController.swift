@@ -29,6 +29,7 @@ class StartView: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let screenWidth = view.frame.size.width
         let screenHeight = view.frame.size.height
         imageView.frame = CGRect(x: 0, y: 150, width: screenWidth, height: screenWidth)

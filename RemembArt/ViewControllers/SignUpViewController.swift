@@ -10,8 +10,10 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    var utils = Utilities()
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .white
         let buttonsStack = ButtonsStack()
         view.addSubview(buttonsStack)
@@ -20,10 +22,11 @@ class SignUpViewController: UIViewController {
     
     
     func ButtonsStack() -> UIStackView {
-        let headerView = UIStackView(frame: CGRect(x: 0, y: topDistance, width: view.frame.width, height: 300))
+        let headerView = UIStackView(frame: CGRect(x: 100, y: topDistance + 200, width: view.frame.width - 200, height: 200))
         headerView.axis = .vertical
         headerView.distribution = .fillEqually
-        headerView.alignment = .center
+        headerView.alignment = .fill
+        headerView.spacing = 30.0
         
         let logInBotton = UIButton()
         logInBotton.setTitleColor(.blue, for: .normal)
@@ -35,7 +38,9 @@ class SignUpViewController: UIViewController {
         
         logInBotton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        
+        utils.styleHollowButton(signUpButton)
+        utils.styleFilledButton(logInBotton)
+
         headerView.addArrangedSubview(logInBotton)
         headerView.addArrangedSubview(signUpButton)
         

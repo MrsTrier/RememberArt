@@ -34,8 +34,6 @@ class Utilities {
         button.layer.cornerRadius = 15.0
         button.titleLabel?.font = UIFont(name: "Copperplate-Bold", size: 20)
         button.setTitleColor(.white, for: .normal)
-
-//        button.tintColor = UIColor.white
     }
     
     func styleHollowButton(_ button:UIButton) {
@@ -49,10 +47,52 @@ class Utilities {
         button.tintColor = UIColor.white
     }
     
+    var myUIImages : [Image] = []
+    
+    func pngFromUrl(for images: [AvailableImage]) {
+        myUIImages = []
+        let arrayLenght = images.count
+        for image in images {
+            let networkServece = NetworkService()
+            if image.png == nil {
+                networkServece.downloadImage(url: image.url!) { uiImage, error in
+
+                    DispatchQueue.main.async {
+                        guard let uiImage = uiImage else {
+                            return
+                        }
+                        let themeImage = Image(name: image.imageName!, artist: image.artist!, description: image.imageDescription!, url: image.url, png: uiImage)
+                        self.myUIImages.append(themeImage)
+                        if self.myUIImages.count == arrayLenght {
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImagesForGameLoaded"), object: nil)
+                        }
+                    }
+                }
+            } else {
+                let compliteImage = Image(name: image.imageName!, artist: image.artist!, description: image.imageDescription!, url: image.url, png: UIImage(data: image.png as! Data))
+                self.myUIImages.append(compliteImage)
+            }
+        }
+    }
+    
+    func returnPng() -> [Image] {
+        return myUIImages
+    }
+
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
     }
+ 
     
+    func fieldValidation(_ field: UITextField) -> String? {
+        // Проверка что во всех полях есть значения
+        let cleanField = field.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if cleanField == "" {
+            return "Пожалуйста заполни каждое поле!"
+        }
+        return nil
+    }
 }

@@ -17,7 +17,10 @@ protocol PopUpViewBuilder: AnyObject {
     func build(subtitle: String) -> Self
     
     @discardableResult
-    func build(body: String) -> Self
+    func build(delegate: UIViewController) -> Self
+    
+    @discardableResult
+    func build(buttons: [UIButton]) -> Self
     
     @discardableResult
     func build(badge: Int) -> Self
@@ -28,29 +31,44 @@ protocol PopUpViewBuilder: AnyObject {
     @discardableResult
     func reset() -> Self
     
-    func result() -> UIView
+    func result() -> PopUpView
 }
 
 
 final class LocalPopUpViewBuilder {
     
-    private var popUpView = UIView()
+    var popUpView: PopUpView
+    UIView
+    
+    init(_ frame: CGRect, imageName: String) {
+        popUpView = PopUpView(frame: frame, andImage: UIImage(named: imageName)!)
+    }
+
 }
 
 extension LocalPopUpViewBuilder: PopUpViewBuilder {
     
+    
     func build(title: String) -> LocalPopUpViewBuilder {
-//        currentNotification.title = title
         return self
     }
+    
+    func build(delegate: UIViewController) -> LocalPopUpViewBuilder {
+        popUpView.delegate = delegate as! PopUpViewProtocol
+        return self
+    }
+    
     
     func build(subtitle: String) -> LocalPopUpViewBuilder {
 //        currentNotification.subtitle = subtitle
         return self
     }
     
-    func build(body: String) -> LocalPopUpViewBuilder {
-//        currentNotification.body = body
+    func build(buttons: [UIButton]) -> LocalPopUpViewBuilder {
+        
+        for but in buttons {
+            popUpView.addSubview(but)
+        }
         return self
     }
     
@@ -65,11 +83,14 @@ extension LocalPopUpViewBuilder: PopUpViewBuilder {
     }
     
     func reset() -> LocalPopUpViewBuilder {
-        popUpView = UIView()
+        popUpView = UIView() as! PopUpView
         return self
     }
     
-    func result() -> UIView {
-        return popUpView.copy() as? UIView ?? UIView()
+    
+
+    
+    func result() -> PopUpView {
+        return popUpView
     }
 }

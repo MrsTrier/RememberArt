@@ -12,6 +12,7 @@ import Firebase
 
 class AuthoriseUserViewController: UIViewController {
 
+    var utils = Utilities()
     var userWish: String?
     var userInfoStack = UIStackView()
     var nameField = UITextField()
@@ -36,10 +37,11 @@ class AuthoriseUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         userInfoStack = CreateFieldsStack(acordinToThe: userWish)
         userInfoStack.translatesAutoresizingMaskIntoConstraints = false
 
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         view.addSubview(userInfoStack)
         setupConstraints()
     }
@@ -74,15 +76,17 @@ class AuthoriseUserViewController: UIViewController {
         errorLable.textColor = .red
         errorLable.text = "Error"
         errorLable.numberOfLines = 0
-        
         errorLable.sizeToFit()
         errorLable.alpha = 0
+        errorLable.font = UIFont(name: "Copperplate-Bold", size: 20)
+        errorLable.textColor = UIColor(red:0.02, green:0.03, blue:0.18, alpha:1.0)
         
         let signUpButton = UIButton()
         signUpButton.setTitleColor(.blue, for: .normal)
 
         signUpButton.tintColor = UIColor(red:0.02, green:0.03, blue:0.18, alpha:1.0)
         signUpButton.setTitle((userWish == "Sign Up") ? "Sign Up" : "Log in", for: .normal)
+        utils.styleFilledButton(signUpButton)
         
         signUpButton.addTarget(self, action: (userWish == "Sign Up") ? #selector(signUpButtonTapped) : #selector(logInButtonTapped), for: .touchUpInside)
         
@@ -108,24 +112,24 @@ class AuthoriseUserViewController: UIViewController {
     }
 
     @objc func logInButtonTapped() {
-//        let cleanPassword = passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let cleanEmail = logInField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if cleanPassword == "" || cleanEmail == "" {
-//            // При вводе данных пользователь допустил ошибку
-//            self.showError("Email или пароль введены с ошибкой")
-//        }
+        let cleanPassword = passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanEmail = logInField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if cleanPassword == "" || cleanEmail == "" {
+            // При вводе данных пользователь допустил ошибку
+            self.showError("Email или пароль введены с ошибкой")
+        }
+
+        Auth.auth().signIn(withEmail: cleanEmail!, password: cleanPassword!) { (result, error) in
+            if error != nil {
+                self.errorLable.text = error!.localizedDescription
+                self.errorLable.alpha = 1
+            } else {
+//                 Поздравляю с авторизацией!
 //
-//        Auth.auth().signIn(withEmail: cleanEmail!, password: cleanPassword!) { (result, error) in
-//            if error != nil {
-//                self.errorLable.text = error!.localizedDescription
-//                self.errorLable.alpha = 1
-//            } else {
-                // Поздравляю с авторизацией!
-                
-                // Смена экрана
+//                 Смена экрана
                 self.showViewForLogedinUser()
-//            }
-//        }
+            }
+        }
     }
     
     /// Проверяет коректность пользовательской информации в текстовых полях

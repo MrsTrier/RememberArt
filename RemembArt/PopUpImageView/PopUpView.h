@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) makeViewVisible;
 
 
-- (instancetype)initWithFrame:(CGRect)frame andImage:(UIImage*)image;
+- (instancetype)initWithFrame:(CGRect)frame andImage:(UIImage*)image andType:(NSArray*)type;
 @end
 
 NS_ASSUME_NONNULL_END

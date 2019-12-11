@@ -8,13 +8,13 @@
 
 import Foundation
 
-class SaveUserActivity {
-    
-    func saveGame() {
-        
-    }
-    
-    func saveImage() {
-        
-    }
-}
+//class SaveUserActivity {
+//    
+//    func saveGame() {
+//        
+//    }
+//    
+//    func saveImage() {
+//        
+//    }
+//}

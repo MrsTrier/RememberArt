@@ -16,7 +16,7 @@ final class CoreDataStack {
         let shared = CoreDataStack()
         return shared
     }()
-    
+
     private init() {
         persistentContainer = NSPersistentContainer(name: "GameModel")
         persistentContainer.loadPersistentStores { storeDescription, error in
@@ -84,7 +84,8 @@ final class CoreDataStack {
     var imagesForGame: [Image] = []
     var currentGames: [Game] = []
     var currentArtists: [Artist] = []
-    
+    var utils = Utilities()
+
     /// Загрузка дефолтных значений из хранилища при первом запуске приложения
     func firstLaunchSettings() {
         let launchedBefore = UserDefaults.standard.bool(forKey: "alreadyLaunched")
@@ -94,11 +95,11 @@ final class CoreDataStack {
         }
         //UserDefaults.standard.set(false, forKey: "launchedBefore") // для перезагрузки дефолтных значений
     }
-    
+
     @objc func saveGames() {
         self.currentGames = data.returnAllGames()
         saveAllData()
-        NotificationCenter.default.addObserver(self, selector: #selector(requestImages), name: NSNotification.Name(rawValue: "ImagesSaved"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(requestImages), name: NSNotification.Name(rawValue: "GamesSaved"), object: nil)
     }
     
     func saveAllData() {
@@ -119,46 +120,67 @@ final class CoreDataStack {
                 gameToSave.setValue(game.name, forKey: "gameName")
                 gameToSave.setValue(game.description, forKey: "gameDescription")
                 gameToSave.setValue(NSSet.init(array: arrayOfImages), forKey: "images")
-
             }
             try? context.save()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImagesSaved"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "GamesSaved"), object: nil)
         }
         UserDefaults.standard.set(true, forKey: "launchedBefore")
     }
     
-    func saveImage(_ image: UIImage) {
-
+    func saveImage(_ image: Image) {
+        persistentContainer.performBackgroundTask { (context) in
+            let imageObj = NSEntityDescription.insertNewObject(forEntityName: "AvailableImage", into: context)
+            imageObj.setValue(image.name, forKey: "imageName")
+            imageObj.setValue(image.description, forKey: "imageDescription")
+            imageObj.setValue(image.artist, forKey: "artist")
+            imageObj.setValue(image.url, forKey: "url")
+            let imageData = image.png?.pngData()
+            imageObj.setValue(imageData, forKey: "png")
+            try? context.save()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UserImageSaved"), object: nil)
+        }
+    }
+    
+    func saveUserGame(_ game: Game) {
+        
+        persistentContainer.performBackgroundTask { (context) in
+            let gameToSave = NSEntityDescription.insertNewObject(forEntityName: "AvailableGame", into: context)
+            var arrayOfImages: [NSManagedObject] = []
+            gameToSave.setValue(game.name, forKey: "gameName")
+            gameToSave.setValue(game.description, forKey: "gameDescription")
+            for image in game.imagesForGame {
+                let imageObj = NSEntityDescription.insertNewObject(forEntityName: "AvailableImage", into: context)
+                imageObj.setValue(image.name, forKey: "imageName")
+                imageObj.setValue(image.description, forKey: "imageDescription")
+                imageObj.setValue(image.artist, forKey: "artist")
+                imageObj.setValue(image.url, forKey: "url")
+                imageObj.setValue(gameToSave, forKey: "game")
+                arrayOfImages.append(imageObj)
+            }
+            gameToSave.setValue(NSSet.init(array: arrayOfImages), forKey: "images")
+            try? context.save()
+        }
     }
     
     @objc func requestImages() {
         data.exessFullImageData()
-        NotificationCenter.default.addObserver(self, selector: #selector(saveImages), name: NSNotification.Name(rawValue: "ImageDataReceived"), object: nil)        
+        NotificationCenter.default.addObserver(self, selector: #selector(saveImages), name: NSNotification.Name(rawValue: "ImageDataReceived"), object: nil)
     }
 
     @objc func saveImages() {
         self.currentArtists = data.returnImageData()
-        
+
         persistentContainer.performBackgroundTask { (context) in
             for artist in self.currentArtists {
-                var arrayOfImages: [NSManagedObject] = []
-                let imageToSave = NSEntityDescription.insertNewObject(forEntityName: "AvailableImage", into: context)
                 for work in artist.works {
                     let imageObj = NSEntityDescription.insertNewObject(forEntityName: "AvailableImage", into: context)
-                    imageObj.setValue(image.name, forKey: "imageName")
-                    imageObj.setValue(image.description, forKey: "imageDescription")
-                    imageObj.setValue(image.artist, forKey: "artist")
-                    imageObj.setValue(image.url, forKey: "url")
-                    imageObj.setValue(gameToSave, forKey: "game")
-                    arrayOfImages.append(imageObj)
+                    imageObj.setValue(work.name, forKey: "imageName")
+                    imageObj.setValue(work.description, forKey: "imageDescription")
+                    imageObj.setValue(work.artist, forKey: "artist")
+                    imageObj.setValue(work.url, forKey: "url")
                 }
-                gameToSave.setValue(game.name, forKey: "gameName")
-                gameToSave.setValue(game.description, forKey: "gameDescription")
-                gameToSave.setValue(NSSet.init(array: arrayOfImages), forKey: "images")
-                
             }
             try? context.save()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImagesSaved"), object: nil)
         }
     }
     

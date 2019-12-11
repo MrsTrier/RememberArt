@@ -48,6 +48,7 @@ class ISSCustomLayout: UICollectionViewLayout {
             else {
                 return
         }
+
         // Задаем значения ширины и отступов
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset: [CGFloat] = []

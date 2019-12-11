@@ -13,17 +13,23 @@
  */
 @protocol PopUpViewProtocol <NSObject>
 
+
+@optional
+- (void)userWantsCreateGameWithName: (NSString *)name desc: (NSString *)desc;
+
 /**
  Calls to create new task
  
  @param title task title
  @param desc task description
  */
-- (void)taskDidCreatedWithTitle: (NSString *)title desc: (NSString *)desc;
+@optional
+- (void)shureTapped;
 
 /**
  Calls when view is removed without task creation
  */
-- (void)taskCreationDidCanceled;
+@optional
+- (void)gameCreationDidCanceled;
 
 @end

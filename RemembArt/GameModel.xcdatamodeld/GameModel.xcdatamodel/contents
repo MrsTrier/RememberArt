@@ -9,11 +9,12 @@
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="png" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="URI" syncable="YES"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvailableGame" inverseName="images" inverseEntity="AvailableGame" syncable="YES"/>
     </entity>
     <elements>
         <element name="AvailableGame" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="AvailableImage" positionX="-54" positionY="9" width="128" height="120"/>
+        <element name="AvailableImage" positionX="-54" positionY="9" width="128" height="135"/>
     </elements>
 </model>

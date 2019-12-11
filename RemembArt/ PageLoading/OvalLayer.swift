@@ -57,28 +57,28 @@ class OvalLayer: CAShapeLayer {
         wobbleAnimation1.duration = animationDuration
         
         // 2
-        var wobbleAnimation2: CABasicAnimation = CABasicAnimation(keyPath: "path")
+        let wobbleAnimation2: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation2.fromValue = ovalPathSquishVertical.cgPath
         wobbleAnimation2.toValue = ovalPathSquishHorizontal.cgPath
         wobbleAnimation2.beginTime = wobbleAnimation1.beginTime + wobbleAnimation1.duration
         wobbleAnimation2.duration = animationDuration
         
         // 3
-        var wobbleAnimation3: CABasicAnimation = CABasicAnimation(keyPath: "path")
+        let wobbleAnimation3: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation3.fromValue = ovalPathSquishHorizontal.cgPath
         wobbleAnimation3.toValue = ovalPathSquishVertical.cgPath
         wobbleAnimation3.beginTime = wobbleAnimation2.beginTime + wobbleAnimation2.duration
         wobbleAnimation3.duration = animationDuration
         
         // 4
-        var wobbleAnimation4: CABasicAnimation = CABasicAnimation(keyPath: "path")
+        let wobbleAnimation4: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation4.fromValue = ovalPathSquishVertical.cgPath
         wobbleAnimation4.toValue = ovalPathLarge.cgPath
         wobbleAnimation4.beginTime = wobbleAnimation3.beginTime + wobbleAnimation3.duration
         wobbleAnimation4.duration = animationDuration
         
         // 5
-        var wobbleAnimationGroup: CAAnimationGroup = CAAnimationGroup()
+        let wobbleAnimationGroup: CAAnimationGroup = CAAnimationGroup()
         wobbleAnimationGroup.animations = [wobbleAnimation1, wobbleAnimation2, wobbleAnimation3,
                                            wobbleAnimation4]
         wobbleAnimationGroup.duration = wobbleAnimation4.beginTime + wobbleAnimation4.duration

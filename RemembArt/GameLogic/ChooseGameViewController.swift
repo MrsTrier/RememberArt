@@ -120,42 +120,27 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
         UIApplication.shared.beginIgnoringInteractionEvents()
         let themeName = sender.currentTitle
         let game: AvailableGame = returnGameWithName(themeName!)!
-
         self.gameData = getThemeFromButton(game: game)!
-        fillWithUIImages(game: game)
-        NotificationCenter.default.addObserver(self, selector: #selector(loadGame), name: NSNotification.Name(rawValue: "ImagesLoaded"), object: nil)
+        getUIImages(from: game)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadGame), name: NSNotification.Name(rawValue: "ImagesForGameLoaded"), object: nil)
+    }
+    
+    func getUIImages(from game: AvailableGame) {
+        var imagesToConvert: [AvailableImage] = []
+        for image in game.images! {
+            imagesToConvert.append(image as! AvailableImage)
+        }
+        utils.pngFromUrl(for: imagesToConvert)
     }
     
     @objc func loadGame() {
+        gameData.imagesForGame = utils.returnPng()
         let cvc = ConcentrationViewController()
         cvc.theme = gameData
         navigationController?.pushViewController(cvc, animated: true)
     }
     
-    func fillWithUIImages(game: AvailableGame) {
-        var myUIImages : [Image] = []
-        for image in game.images! {
-            let networkServece = NetworkService()
-            networkServece.downloadImage(url: (image as! AvailableImage).url!) { uiImage, error in
-                
-                DispatchQueue.main.async {
-                    guard let uiImage = uiImage else {
-                        return
-                    }
-                    let themeImage = Image(name: (image as! AvailableImage).imageName!, artist: (image as! AvailableImage).artist!, description: (image as! AvailableImage).imageDescription!, url: (image as! AvailableImage).url, png: uiImage)
-                    myUIImages.append(themeImage)
-                    if myUIImages.count >= 10 {
-                        self.gameData.imagesForGame = myUIImages
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ImagesLoaded"), object: nil)
-                    }
-                }
-            }
-        }
-    }
-    
-    func getThemeFromButton(game: AvailableGame) -> Game? {
-    //This is terrible behaviour. I'm identifying the theme to pick based off of the button's name, which makes the code very brittle. However, it will do for our purposes for the moment.
-    
+    func getThemeFromButton(game: AvailableGame) -> Game? {    
         let theme = Game(name: game.gameName!, description: game.gameDescription!, boardColor: UIColor(red:0.04, green:0.17, blue:0.44, alpha:1.0), cardColor: .white, imagesForGame: [])
         return theme
     }
