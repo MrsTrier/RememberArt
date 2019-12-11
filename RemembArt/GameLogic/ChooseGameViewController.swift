@@ -90,8 +90,8 @@ class ConcentrationThemeChooserViewController: UIViewController, HolderViewDeleg
         myGames.addTarget(self, action: #selector(changeTheme(_:)), for: .touchUpInside)
         allGames.addTarget(self, action: #selector(changeTheme(_:)), for: .touchUpInside)
 
-        headerView.addArrangedSubview(myGames)
-        headerView.addArrangedSubview(allGames)
+//        headerView.addArrangedSubview(myGames)
+//        headerView.addArrangedSubview(allGames)
 
         return headerView
     }
